@@ -12,7 +12,7 @@ private enum OnboardingFlowStep {
     case SplashPage
     case LoginPage
     case RegistrationPage
-    case Onboarding(User)
+    case PersonalizationPage(User)
     case Complete(User)
 }
 
@@ -37,7 +37,7 @@ class OnboardingFlowController: UINavigationController {
                 case .LoggedIn(let user):
                     self?.flowStep = .Complete(user)
                 case .Registered(let user):
-                    self?.flowStep = .Onboarding(user)
+                    self?.flowStep = .PersonalizationPage(user)
                 }
                 self?.nextStep()
             })
@@ -45,7 +45,7 @@ class OnboardingFlowController: UINavigationController {
         case .RegistrationPage:
             let registrationController = RegistrationController(completion: {[weak self] user, isNewUser in
                 if isNewUser {
-                    self?.flowStep = .Onboarding(user)
+                    self?.flowStep = .PersonalizationPage(user)
                 } else {
                     self?.flowStep = .Complete(user)
                 }
@@ -60,12 +60,12 @@ class OnboardingFlowController: UINavigationController {
                 self?.nextStep()
             })
             self.presentViewController(loginController, animated: true, completion: nil)
-        case .Onboarding(let user):
-            let onboardingController = OnboardingController(user: user, completion: {[weak self] user in
+        case .PersonalizationPage(let user):
+            let personalizationController = PersonalizationController(user: user, completion: {[weak self] user in
                 self?.flowStep = .Complete(user)
                 self?.nextStep()
             })
-            self.pushViewController(onboardingController, animated: true)
+            self.pushViewController(personalizationController, animated: true)
         case .Complete(let user):
             completion(user)
         }

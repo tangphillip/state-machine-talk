@@ -1,5 +1,5 @@
 //
-//  OnboardingController.swift
+//  PersonalizationController.swift
 //  State Machines
 //
 //  Created by Phillip Tang on 1/7/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingController: UIViewController {
+class PersonalizationController: UIViewController {
     @IBAction func onboardingComplete() {
         self.completion(User())
     }
