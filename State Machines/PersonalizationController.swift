@@ -9,19 +9,21 @@
 import UIKit
 
 class PersonalizationController: UIViewController {
-    @IBAction func onboardingComplete() {
-        self.completion(User())
-    }
-
-    let completion: User -> ()
+    let completion: (user: User) -> ()
     let user: User
 
-    init(user: User, completion:User -> ()) {
+    init(user: User, completion:(user: User) -> ()) {
         self.user = user
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
+        self.navigationItem.hidesBackButton = true
+        self.edgesForExtendedLayout = .None
     }
 
+    @IBAction func didTapFinishedLearning(sender: AnyObject) {
+        completion(user: user)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

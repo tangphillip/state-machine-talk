@@ -14,8 +14,16 @@ class RegistrationController: UIViewController {
     init(completion: (user: User, isNewUser: Bool) -> ()) {
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
+        self.modalPresentationStyle = .OverFullScreen
+        self.modalTransitionStyle = .CrossDissolve
     }
 
+    @IBAction func didTapEnter(sender: AnyObject) {
+        completion(user: User(), isNewUser: false)
+    }
+    @IBAction func didTapSignUp(sender: AnyObject) {
+        completion(user: User(), isNewUser: true)
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

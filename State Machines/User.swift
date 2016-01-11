@@ -15,7 +15,7 @@ enum LoginResult {
 
 struct User {
     static func logInWithFacebook(completion: LoginResult -> ()) {
-
+        completion(.LoginSuccess(User()))
     }
 
     static func logIn(username: String, password: String, completion: LoginResult -> ()) {

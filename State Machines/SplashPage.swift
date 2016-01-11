@@ -21,8 +21,28 @@ class SplashPage: UIViewController {
     init(completion: SplashPageResult -> ()) {
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
+        self.edgesForExtendedLayout = .None
     }
 
+    @IBAction func didTapLogin(sender: AnyObject) {
+        completion(.Login)
+    }
+    @IBAction func didTapSignUp(sender: AnyObject) {
+        completion(.Registration)
+    }
+    @IBAction func didTapFacebookLogin(sender: AnyObject) {
+        User.logInWithFacebook { result in
+            switch(result) {
+            case .LoginSuccess(let user):
+                self.completion(.LoggedIn(user))
+            case .RegistrationSuccess(let user):
+                self.completion(.Registered(user))
+            case .Failure:
+                let controller = UIAlertController(title: "Failure", message: "Oh no!", preferredStyle: .Alert)
+                self.presentViewController(controller, animated: true, completion: nil)
+            }
+        }
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

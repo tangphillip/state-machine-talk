@@ -22,7 +22,8 @@ class OnboardingFlowController: UINavigationController {
 
     init(completion: User -> ()) {
         self.completion = completion
-        super.init(navigationBarClass: nil, toolbarClass: nil)
+        super.init(nibName:nil, bundle:nil)
+        nextStep()
     }
 
     func nextStep() {
@@ -43,34 +44,33 @@ class OnboardingFlowController: UINavigationController {
             })
             self.pushViewController(splashPage, animated: true)
         case .RegistrationPage:
-            let registrationController = RegistrationController(completion: {[weak self] user, isNewUser in
+            let registrationController = RegistrationController(completion: {user, isNewUser in
                 if isNewUser {
-                    self?.flowStep = .PersonalizationPage(user)
+                    self.flowStep = .PersonalizationPage(user)
                 } else {
-                    self?.flowStep = .Complete(user)
+                    self.flowStep = .Complete(user)
                 }
-                self?.dismissViewControllerAnimated(true, completion: nil)
-                self?.nextStep()
+                self.dismissViewControllerAnimated(true, completion: nil)
+                self.nextStep()
             })
             self.presentViewController(registrationController, animated: true, completion: nil)
         case .LoginPage:
-            let loginController = LoginController(completion: {[weak self] user in
-                self?.flowStep = .Complete(user)
-                self?.dismissViewControllerAnimated(true, completion: nil)
-                self?.nextStep()
+            let loginController = LoginController(completion: {user in
+                self.flowStep = .Complete(user)
+                self.dismissViewControllerAnimated(true, completion: nil)
+                self.nextStep()
             })
             self.presentViewController(loginController, animated: true, completion: nil)
         case .PersonalizationPage(let user):
-            let personalizationController = PersonalizationController(user: user, completion: {[weak self] user in
-                self?.flowStep = .Complete(user)
-                self?.nextStep()
+            let personalizationController = PersonalizationController(user: user, completion: {user in
+                self.flowStep = .Complete(user)
+                self.nextStep()
             })
             self.pushViewController(personalizationController, animated: true)
         case .Complete(let user):
             completion(user)
         }
     }
-
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
