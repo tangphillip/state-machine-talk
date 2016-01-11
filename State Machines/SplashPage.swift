@@ -21,7 +21,7 @@ class SplashPage: UIViewController {
     init(completion: SplashPageResult -> ()) {
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
-        self.edgesForExtendedLayout = .None
+        edgesForExtendedLayout = .None
     }
 
     @IBAction func didTapLogin(sender: AnyObject) {

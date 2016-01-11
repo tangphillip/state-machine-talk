@@ -14,8 +14,8 @@ class RegistrationController: UIViewController {
     init(completion: (user: User, isNewUser: Bool) -> ()) {
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
-        self.modalPresentationStyle = .OverFullScreen
-        self.modalTransitionStyle = .CrossDissolve
+        modalPresentationStyle = .OverFullScreen
+        modalTransitionStyle = .CrossDissolve
     }
 
     @IBAction func didTapEnter(sender: AnyObject) {

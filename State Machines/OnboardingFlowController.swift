@@ -29,18 +29,18 @@ class OnboardingFlowController: UINavigationController {
     func nextStep() {
         switch(flowStep) {
         case .SplashPage:
-            let splashPage = SplashPage(completion: {[weak self] loginType in
+            let splashPage = SplashPage(completion: {loginType in
                 switch(loginType) {
                 case .Login:
-                    self?.flowStep = .LoginPage
+                    self.flowStep = .LoginPage
                 case .Registration:
-                    self?.flowStep = .RegistrationPage
+                    self.flowStep = .RegistrationPage
                 case .LoggedIn(let user):
-                    self?.flowStep = .Complete(user)
+                    self.flowStep = .Complete(user)
                 case .Registered(let user):
-                    self?.flowStep = .PersonalizationPage(user)
+                    self.flowStep = .PersonalizationPage(user)
                 }
-                self?.nextStep()
+                self.nextStep()
             })
             self.pushViewController(splashPage, animated: true)
         case .RegistrationPage:

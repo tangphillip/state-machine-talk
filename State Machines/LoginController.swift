@@ -14,15 +14,15 @@ class LoginController: UIViewController {
     init(completion: (user: User) -> ()) {
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
-        self.modalPresentationStyle = .OverFullScreen
-        self.modalTransitionStyle = .CrossDissolve
+        modalPresentationStyle = .OverFullScreen
+        modalTransitionStyle = .CrossDissolve
     }
 
     @IBAction func didTypeEnter(sender: AnyObject) {
-        self.completion(user: User())
+        completion(user: User())
     }
     @IBAction func didTapLogIn(sender: AnyObject) {
-        self.completion(user: User())
+        completion(user: User())
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

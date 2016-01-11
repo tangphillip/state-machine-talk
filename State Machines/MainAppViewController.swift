@@ -13,6 +13,6 @@ class MainAppViewController: UIViewController {
         let onboardingFlow = OnboardingFlowController(completion: { user in
             self.dismissViewControllerAnimated(true, completion: nil)
         });
-        self.presentViewController(onboardingFlow, animated: true, completion: nil)
+        presentViewController(onboardingFlow, animated: true, completion: nil)
     }
 }

@@ -16,8 +16,8 @@ class PersonalizationController: UIViewController {
         self.user = user
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
-        self.navigationItem.hidesBackButton = true
-        self.edgesForExtendedLayout = .None
+        navigationItem.hidesBackButton = true
+        edgesForExtendedLayout = .None
     }
 
     @IBAction func didTapFinishedLearning(sender: AnyObject) {
