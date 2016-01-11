@@ -9,8 +9,8 @@
 import UIKit
 
 class PersonalizationController: UIViewController {
-    let completion: (user: User) -> ()
-    let user: User
+    private let completion: (user: User) -> ()
+    private let user: User
 
     init(user: User, completion:(user: User) -> ()) {
         self.user = user
@@ -20,7 +20,7 @@ class PersonalizationController: UIViewController {
         edgesForExtendedLayout = .None
     }
 
-    @IBAction func didTapFinishedLearning(sender: AnyObject) {
+    @IBAction private func didTapFinishedLearning(sender: AnyObject) {
         completion(user: user)
     }
     

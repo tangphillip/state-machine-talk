@@ -18,7 +18,7 @@ private enum OnboardingFlowStep {
 
 class OnboardingFlowController: UINavigationController {
     private var flowStep = OnboardingFlowStep.SplashPage
-    let completion : User -> ()
+    private let completion : User -> ()
 
     init(completion: User -> ()) {
         self.completion = completion
@@ -26,7 +26,7 @@ class OnboardingFlowController: UINavigationController {
         nextStep()
     }
 
-    func nextStep() {
+    private func nextStep() {
         switch(flowStep) {
         case .SplashPage:
             let splashPage = SplashPage(completion: {loginType in

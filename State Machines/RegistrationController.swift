@@ -9,7 +9,7 @@
 import UIKit
 
 class RegistrationController: UIViewController {
-    let completion: (user: User, isNewUser: Bool) -> ()
+    private let completion: (user: User, isNewUser: Bool) -> ()
 
     init(completion: (user: User, isNewUser: Bool) -> ()) {
         self.completion = completion
@@ -18,10 +18,10 @@ class RegistrationController: UIViewController {
         modalTransitionStyle = .CrossDissolve
     }
 
-    @IBAction func didTapEnter(sender: AnyObject) {
+    @IBAction private func didTapEnter(sender: AnyObject) {
         completion(user: User(), isNewUser: false)
     }
-    @IBAction func didTapSignUp(sender: AnyObject) {
+    @IBAction private func didTapSignUp(sender: AnyObject) {
         completion(user: User(), isNewUser: true)
     }
     required init?(coder aDecoder: NSCoder) {

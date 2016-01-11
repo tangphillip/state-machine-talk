@@ -16,7 +16,7 @@ enum SplashPageResult {
 }
 
 class SplashPage: UIViewController {
-    let completion: SplashPageResult -> ()
+    private let completion: SplashPageResult -> ()
 
     init(completion: SplashPageResult -> ()) {
         self.completion = completion
@@ -24,13 +24,13 @@ class SplashPage: UIViewController {
         edgesForExtendedLayout = .None
     }
 
-    @IBAction func didTapLogin(sender: AnyObject) {
+    @IBAction private func didTapLogin(sender: AnyObject) {
         completion(.Login)
     }
-    @IBAction func didTapSignUp(sender: AnyObject) {
+    @IBAction private func didTapSignUp(sender: AnyObject) {
         completion(.Registration)
     }
-    @IBAction func didTapFacebookLogin(sender: AnyObject) {
+    @IBAction private func didTapFacebookLogin(sender: AnyObject) {
         User.logInWithFacebook { result in
             switch(result) {
             case .LoginSuccess(let user):

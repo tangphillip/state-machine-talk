@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginController: UIViewController {
-    let completion: (user: User) -> ()
+    private let completion: (user: User) -> ()
 
     init(completion: (user: User) -> ()) {
         self.completion = completion
@@ -18,10 +18,10 @@ class LoginController: UIViewController {
         modalTransitionStyle = .CrossDissolve
     }
 
-    @IBAction func didTypeEnter(sender: AnyObject) {
+    @IBAction private func didTypeEnter(sender: AnyObject) {
         completion(user: User())
     }
-    @IBAction func didTapLogIn(sender: AnyObject) {
+    @IBAction private func didTapLogIn(sender: AnyObject) {
         completion(user: User())
     }
     required init?(coder aDecoder: NSCoder) {
