@@ -17,54 +17,54 @@ private enum OnboardingFlowStep {
 }
 
 class OnboardingFlowController: UINavigationController {
-    private var flowStep = OnboardingFlowStep.SplashPage
+    private var currentStep = OnboardingFlowStep.SplashPage
     private let completion : User -> ()
 
     init(completion: User -> ()) {
         self.completion = completion
         super.init(nibName:nil, bundle:nil)
-        nextStep()
+        performCurrentStep()
     }
 
-    private func nextStep() {
-        switch(flowStep) {
+    private func performCurrentStep() {
+        switch(currentStep) {
         case .SplashPage:
             let splashPage = SplashPage(completion: {loginType in
                 switch(loginType) {
                 case .Login:
-                    self.flowStep = .LoginPage
+                    self.currentStep = .LoginPage
                 case .Registration:
-                    self.flowStep = .RegistrationPage
+                    self.currentStep = .RegistrationPage
                 case .LoggedIn(let user):
-                    self.flowStep = .Complete(user)
+                    self.currentStep = .Complete(user)
                 case .Registered(let user):
-                    self.flowStep = .PersonalizationPage(user)
+                    self.currentStep = .PersonalizationPage(user)
                 }
-                self.nextStep()
+                self.performCurrentStep()
             })
             self.pushViewController(splashPage, animated: true)
         case .RegistrationPage:
             let registrationController = RegistrationController(completion: {user, isNewUser in
                 if isNewUser {
-                    self.flowStep = .PersonalizationPage(user)
+                    self.currentStep = .PersonalizationPage(user)
                 } else {
-                    self.flowStep = .Complete(user)
+                    self.currentStep = .Complete(user)
                 }
                 self.dismissViewControllerAnimated(true, completion: nil)
-                self.nextStep()
+                self.performCurrentStep()
             })
             self.presentViewController(registrationController, animated: true, completion: nil)
         case .LoginPage:
             let loginController = LoginController(completion: {user in
-                self.flowStep = .Complete(user)
+                self.currentStep = .Complete(user)
                 self.dismissViewControllerAnimated(true, completion: nil)
-                self.nextStep()
+                self.performCurrentStep()
             })
             self.presentViewController(loginController, animated: true, completion: nil)
         case .PersonalizationPage(let user):
             let personalizationController = PersonalizationController(user: user, completion: {user in
-                self.flowStep = .Complete(user)
-                self.nextStep()
+                self.currentStep = .Complete(user)
+                self.performCurrentStep()
             })
             self.pushViewController(personalizationController, animated: true)
         case .Complete(let user):
