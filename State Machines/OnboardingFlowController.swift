@@ -13,6 +13,7 @@ private enum OnboardingFlowStep {
     case LoginPage
     case RegistrationPage
     case PersonalizationPage(User)
+    case SalesPage(User)
     case Complete(User)
 }
 
@@ -59,9 +60,14 @@ class OnboardingFlowController: UINavigationController {
             self.presentViewController(loginController, animated: true, completion: nil)
         case .PersonalizationPage(let user):
             let personalizationController = PersonalizationController(user: user, completion: {user in
-                self.performStep(.Complete(user))
+                self.performStep(.SalesPage(user))
             })
             self.pushViewController(personalizationController, animated: true)
+        case .SalesPage(let user):
+            let salesController = SalesController(user: user, completion: { (user) -> () in
+                self.performStep(.Complete(user))
+            })
+            self.pushViewController(salesController, animated: true)
         case .Complete(let user):
             completion(user)
         }
