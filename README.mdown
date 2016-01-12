@@ -1,0 +1,19 @@
+Building UI with State Machines
+-------------------------------
+
+A talk given at iOSoho in NYC on January 11, 2016.
+
+This repository contains the slides and code I used to talk about building
+state machines with state machines.
+
+The talk revolves around three main ideas:
+
+1. **Flow controllers:** A way to pull view-controller-to-view-controller
+   transition logic out of the individual view controllers, and into a single
+   flow controller.
+2. **State machines:** A collection of states and transitions. For the purpose of
+   this talk, our states are view controllers, and our transitions are the
+   transitions between them.
+3. **View Controller completion blocks:** Thinking about view controllers as an
+   asynchronous process, and giving them completion blocks. This lets us clean
+   up the code and make it more readable.
